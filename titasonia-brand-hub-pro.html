@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TitaSonia.Ph — Brand Hub Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Mulish:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c8920a;--gold-lt:#e8c96a;--gold-pale:#fdf7e0;--gold-dim:rgba(200,146,10,.10);
+  --rose:#c4456a;--rose-lt:#f0a8bc;--rose-pale:#fceef3;--rose-dim:rgba(196,69,106,.10);
+  --sage:#5a8a65;--sage-pale:#daf0de;--sage-dim:rgba(90,138,101,.10);
+  --ink:#1a0e08;--ink2:#3a2818;--muted:#8a7060;
+  --border:#ecddd0;--card:#fffcf8;--bg:#faf5ee;--bg2:#f2ebe0;
+  --dark:#1a1008;--dark2:#2a1c10;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Mulish',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;}
+
+/* ── NOISE ── */
+body::after{content:'';position:fixed;inset:0;z-index:0;opacity:.4;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");}
+
+/* ══════════ MASTHEAD ══════════ */
+.masthead{position:relative;z-index:1;background:linear-gradient(150deg,#1a0e08 0%,#2e1810 45%,#3a2010 100%);overflow:hidden;}
+.mast-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 85% 40%,rgba(200,146,10,.14) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 70%,rgba(196,69,106,.08) 0%,transparent 70%);pointer-events:none;}
+.mast-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+
+.mast-inner{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:50px 28px 56px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;}
+@media(max-width:640px){.mast-inner{grid-template-columns:1fr;gap:28px;padding:38px 20px 44px;}}
+
+.mast-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(200,146,10,.18);border:1px solid rgba(200,146,10,.35);color:var(--gold-lt);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+.mast-blink{width:6px;height:6px;border-radius:50%;background:var(--gold-lt);animation:blink 1.8s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.5)}}
+
+.mast-title{font-family:'Cormorant',serif;font-size:clamp(32px,6vw,58px);color:#fff;line-height:1.0;margin-bottom:8px;}
+.mast-title em{font-style:italic;color:var(--gold-lt);}
+.mast-sub{font-family:'Cormorant',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.45);margin-bottom:26px;line-height:1.5;}
+.mast-badges{display:flex;flex-wrap:wrap;gap:7px;}
+.mb{font-size:11px;font-weight:700;padding:5px 13px;border-radius:100px;border:1px solid;}
+.mb-gold{background:rgba(200,146,10,.15);border-color:rgba(200,146,10,.3);color:var(--gold-lt);}
+.mb-rose{background:rgba(196,69,106,.15);border-color:rgba(196,69,106,.3);color:#f0a8bc;}
+.mb-sage{background:rgba(90,138,101,.15);border-color:rgba(90,138,101,.3);color:#90d4a0;}
+
+.mast-right{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:20px;padding:24px;}
+.mr-row{margin-bottom:16px;}
+.mr-row:last-child{margin-bottom:0;}
+.mr-label{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;}
+.mr-val{font-size:13px;color:rgba(255,255,255,.75);line-height:1.6;}
+.mr-val em{font-style:italic;color:var(--gold-lt);}
+.mr-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.mr-chip{font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
+
+/* ══════════ LAYOUT ══════════ */
+.wrap{max-width:1000px;margin:0 auto;padding:40px 20px 80px;position:relative;z-index:1;}
+.section{margin-bottom:52px;animation:fadeUp .5s ease both;}
+.section:nth-child(1){animation-delay:.04s}.section:nth-child(2){animation-delay:.08s}.section:nth-child(3){animation-delay:.12s}.section:nth-child(4){animation-delay:.16s}.section:nth-child(5){animation-delay:.20s}.section:nth-child(6){animation-delay:.24s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.sh-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:3px 9px;border-radius:6px;}
+.sh-title{font-family:'Cormorant',serif;font-size:22px;color:var(--ink);}
+.sh-title::after{content:'';display:block;width:26px;height:2px;background:var(--gold);margin-top:3px;}
+
+/* ══════════ PRODUCT UPLOADER ══════════ */
+.uploader{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+
+.up-header{background:linear-gradient(135deg,var(--dark),var(--dark2));padding:22px 26px;display:flex;align-items:center;gap:14px;}
+.up-icon{width:46px;height:46px;border-radius:13px;background:rgba(200,146,10,.2);border:1px solid rgba(200,146,10,.3);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.up-head-text{}
+.up-head-title{font-family:'Cormorant',serif;font-size:19px;font-weight:700;color:#fff;margin-bottom:2px;}
+.up-head-sub{font-size:12px;color:rgba(255,255,255,.4);}
+
+.up-body{padding:26px;}
+
+/* drop zone */
+.drop-zone{
+  border:2px dashed var(--border);border-radius:16px;padding:36px 20px;
+  text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);
+  position:relative;overflow:hidden;
+}
+.drop-zone.drag-over{border-color:var(--gold);background:var(--gold-pale);}
+.drop-zone.has-image{border-style:solid;border-color:var(--gold);padding:0;}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.dz-icon{font-size:38px;margin-bottom:10px;}
+.dz-title{font-size:14px;font-weight:700;color:var(--ink2);margin-bottom:4px;}
+.dz-sub{font-size:12px;color:var(--muted);}
+#preview-img{width:100%;max-height:240px;object-fit:cover;border-radius:14px;display:none;}
+
+/* form fields */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+@media(max-width:500px){.form-grid{grid-template-columns:1fr;}}
+
+.field label{display:block;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 14px;background:var(--bg);
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:'Mulish',sans-serif;font-size:13px;color:var(--ink);
+  outline:none;transition:border-color .2s;resize:vertical;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
+.field.full{grid-column:1/-1;}
+
+/* mode selector */
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+@media(max-width:560px){.modes{grid-template-columns:1fr 1fr;}}
+.mode-card{
+  padding:14px 10px;border-radius:12px;border:1.5px solid var(--border);
+  text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);
+}
+.mode-card.selected{border-color:var(--gold);background:var(--gold-pale);}
+.mode-card:hover:not(.selected){border-color:var(--gold-lt);background:var(--gold-dim);}
+.mode-icon{font-size:22px;margin-bottom:6px;}
+.mode-name{font-size:11px;font-weight:700;color:var(--ink2);}
+.mode-desc{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.3;}
+.mode-card.selected .mode-name{color:var(--gold);}
+
+.gen-btn{
+  width:100%;padding:15px;
+  background:linear-gradient(135deg,var(--gold),#9a6e09);
+  color:#fff;font-family:'Mulish',sans-serif;font-size:14px;font-weight:800;
+  border:none;border-radius:12px;cursor:pointer;letter-spacing:.04em;
+  transition:transform .15s,box-shadow .15s,opacity .2s;
+  position:relative;overflow:hidden;
+}
+.gen-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(200,146,10,.38);}
+.gen-btn:active{transform:scale(.98);}
+.gen-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none;}
+.gen-btn .btn-shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.2) 50%,transparent 60%);transform:translateX(-100%);animation:shine 2.5s ease-in-out infinite;}
+@keyframes shine{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+/* ══════════ OUTPUT AREA ══════════ */
+.output-area{margin-top:22px;display:none;}
+.output-area.show{display:block;animation:fadeUp .4s ease both;}
+
+.out-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.out-tab{
+  padding:8px 16px;border-radius:100px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);color:var(--muted);cursor:pointer;
+  background:var(--bg);transition:all .2s;
+}
+.out-tab.active{background:var(--dark);border-color:var(--dark);color:var(--gold-lt);}
+
+.out-panel{display:none;}
+.out-panel.active{display:block;animation:fadeUp .3s ease both;}
+
+.out-box{
+  background:var(--dark);border-radius:16px;padding:22px;
+  border:1px solid rgba(255,255,255,.06);position:relative;
+}
+.out-label{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;}
+.out-content{font-size:13.5px;color:rgba(255,255,255,.82);line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+
+/* syntax colors */
+.out-content .c-gold{color:#f0d090;}
+.out-content .c-rose{color:#f0a8bc;}
+.out-content .c-sage{color:#90d4a0;}
+.out-content .c-blue{color:#a0c0ff;}
+.out-content .c-muted{color:rgba(255,255,255,.35);}
+.out-content .c-bold{color:#fff;font-weight:700;}
+
+.out-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.act-btn{
+  padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;
+  cursor:pointer;border:1px solid;transition:all .15s;font-family:'Mulish',sans-serif;
+}
+.act-copy{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.7);}
+.act-copy:hover{background:rgba(255,255,255,.15);color:#fff;}
+.act-dl{background:rgba(200,146,10,.15);border-color:rgba(200,146,10,.3);color:var(--gold-lt);}
+.act-dl:hover{background:rgba(200,146,10,.25);color:var(--gold-lt);}
+
+/* loading */
+.loading{display:none;text-align:center;padding:32px;}
+.loading.show{display:block;}
+.ld-spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-text{font-size:13px;color:var(--muted);}
+.ld-steps{font-size:11px;color:var(--muted);margin-top:6px;font-family:'DM Mono',monospace;}
+
+/* ══════════ QUICK PROMPTS ══════════ */
+.prompts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:520px){.prompts-grid{grid-template-columns:1fr;}}
+
+.prompt-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.prompt-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,14,8,.08);}
+.pc-head{padding:14px 18px 10px;display:flex;align-items:center;gap:10px;}
+.pc-icon{font-size:22px;}
+.pc-title{font-size:14px;font-weight:700;color:var(--ink);}
+.pc-body{padding:0 18px 14px;}
+.pc-code{
+  background:var(--dark);border-radius:10px;padding:14px;
+  font-family:'DM Mono',monospace;font-size:11px;line-height:1.75;
+  color:rgba(255,255,255,.7);overflow-x:auto;
+}
+.pc-code .p-rose{color:#f0a8bc;}
+.pc-code .p-gold{color:#f0d090;}
+.pc-code .p-sage{color:#90d4a0;}
+.pc-copy{
+  margin-top:10px;padding:7px 14px;border-radius:8px;font-size:11px;font-weight:700;
+  background:var(--gold-dim);border:1px solid rgba(200,146,10,.25);color:var(--gold);
+  cursor:pointer;transition:all .15s;font-family:'Mulish',sans-serif;
+}
+.pc-copy:hover{background:var(--gold-pale);}
+
+/* ══════════ BRAND PILLARS MINI ══════════ */
+.pillars-mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:500px){.pillars-mini{grid-template-columns:1fr;}}
+.pm{border-radius:14px;padding:20px;border:1px solid;text-align:center;}
+.pm-glow{background:linear-gradient(160deg,#fceef3,#fff8f0);border-color:var(--rose-lt);}
+.pm-finds{background:linear-gradient(160deg,#fdf7e0,#fffcf0);border-color:var(--gold-lt);}
+.pm-life{background:linear-gradient(160deg,#daf0de,#f5fdf6);border-color:#a8d8b0;}
+.pm-icon{font-size:28px;margin-bottom:8px;}
+.pm-name{font-family:'Cormorant',serif;font-size:17px;font-weight:700;margin-bottom:4px;}
+.pm-glow .pm-name{color:var(--rose);}
+.pm-finds .pm-name{color:var(--gold);}
+.pm-life .pm-name{color:var(--sage);}
+.pm-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:8px;}
+.pm-tag{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;border:1px solid;}
+.pm-glow .pm-tag{background:var(--rose-pale);border-color:var(--rose-lt);color:var(--rose);}
+.pm-finds .pm-tag{background:var(--gold-pale);border-color:var(--gold-lt);color:var(--gold);}
+.pm-life .pm-tag{background:var(--sage-pale);border-color:#a8d8b0;color:var(--sage);}
+
+/* ══════════ TOAST ══════════ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--dark);color:#fff;font-size:13px;font-weight:700;padding:12px 24px;border-radius:100px;box-shadow:0 6px 24px rgba(0,0,0,.28);z-index:999;transition:transform .3s ease;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ══════════ FOOTER ══════════ */
+.footer{text-align:center;padding:28px 20px 44px;border-top:1px solid var(--border);position:relative;z-index:1;}
+.footer-brand{font-family:'Cormorant',serif;font-style:italic;font-size:18px;color:var(--gold);margin-bottom:4px;}
+.footer-note{font-size:11.5px;color:var(--muted);font-style:italic;}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mast-glow"></div><div class="mast-grid"></div>
+  <div class="mast-inner">
+    <div>
+      <div class="mast-eyebrow"><div class="mast-blink"></div>Brand Hub Pro — 2026</div>
+      <div class="mast-title"><em>TitaSonia</em>.Ph<br>Content Engine</div>
+      <div class="mast-sub">Upload your product → get Ad Copy, Audio Scripts & AI Prompts — instantly.</div>
+      <div class="mast-badges">
+        <div class="mb mb-gold">📸 Product Upload</div>
+        <div class="mb mb-rose">✍️ Ad Copy</div>
+        <div class="mb mb-sage">🎙️ Audio Narrative</div>
+        <div class="mb mb-gold">🤖 AI Prompt Suite</div>
+        <div class="mb mb-rose">🛡️ TikTok Compliant</div>
+      </div>
+    </div>
+    <div class="mast-right">
+      <div class="mr-row"><div class="mr-label">Mission</div><div class="mr-val">Help midlife women feel confident through <em>practical finds</em> & real reviews.</div></div>
+      <div class="mr-row"><div class="mr-label">Brand Voice</div><div class="mr-val">Warm · Trustworthy · Tita-like · Practical</div></div>
+      <div class="mr-row"><div class="mr-label">Core Values</div><div class="mr-chips"><span class="mr-chip">✨ Authentic</span><span class="mr-chip">🔧 Practical</span><span class="mr-chip">💪 Empowering</span><span class="mr-chip">🤝 Trustworthy</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══ 01 PRODUCT STUDIO ══ -->
+<div class="section">
+  <div class="sh"><div class="sh-num">01</div><div class="sh-title">Product Content Studio</div></div>
+
+  <div class="uploader">
+    <div class="up-header">
+      <div class="up-icon">🛍️</div>
+      <div class="up-head-text">
+        <div class="up-head-title">Upload Your Product</div>
+        <div class="up-head-sub">Photo + details → AI generates everything you need to sell it</div>
+      </div>
+    </div>
+
+    <div class="up-body">
+
+      <!-- DROP ZONE -->
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="image/*" onchange="handleFile(event)">
+        <img id="preview-img" alt="Product preview">
+        <div id="dz-placeholder">
+          <div class="dz-icon">📸</div>
+          <div class="dz-title">Drop product photo here</div>
+          <div class="dz-sub">PNG, JPG, WEBP — or click to browse</div>
+        </div>
+      </div>
+
+      <!-- PRODUCT DETAILS -->
+      <div class="form-grid">
+        <div class="field">
+          <label>Product Name</label>
+          <input type="text" id="f-name" placeholder="e.g. Collagen Glow Drink">
+        </div>
+        <div class="field">
+          <label>Category</label>
+          <select id="f-cat">
+            <option value="Skincare / Beauty">🌺 Skincare / Beauty (Tita Glow)</option>
+            <option value="Fashion / Clothing">👗 Fashion / Clothing (Tita Finds)</option>
+            <option value="Footwear">👠 Footwear (Tita Finds)</option>
+            <option value="Supplement / Wellness">💊 Supplement / Wellness (Tita Glow)</option>
+            <option value="Home / Lifestyle">🏠 Home / Lifestyle (Tita Life)</option>
+            <option value="Faith / Spiritual">✝️ Faith / Spiritual (Tita Life)</option>
+            <option value="Accessories">💍 Accessories (Tita Finds)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Price (₱)</label>
+          <input type="text" id="f-price" placeholder="e.g. 299 or 299–499">
+        </div>
+        <div class="field">
+          <label>Key Benefit / Feature</label>
+          <input type="text" id="f-benefit" placeholder="e.g. collagen, fades dark spots, comfortable fit">
+        </div>
+        <div class="field full">
+          <label>Your Personal Experience (optional but powerful)</label>
+          <textarea id="f-experience" rows="2" placeholder="e.g. I used this for 2 weeks and noticed my skin felt more hydrated in the morning..."></textarea>
+        </div>
+        <div class="field">
+          <label>Target Audience</label>
+          <select id="f-audience">
+            <option value="Filipina women 35–55">Filipina women 35–55 (primary)</option>
+            <option value="Women 25–40">Women 25–40</option>
+            <option value="Budget-conscious shoppers">Budget-conscious shoppers</option>
+            <option value="Health-conscious Titas">Health-conscious Titas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Language Style</label>
+          <select id="f-lang">
+            <option value="Taglish">Taglish (recommended)</option>
+            <option value="Filipino">Filipino</option>
+            <option value="English">English</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- OUTPUT MODE SELECTOR -->
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;">Select Output Type</div>
+      <div class="modes" id="modeGrid">
+        <div class="mode-card selected" data-mode="all" onclick="selectMode(this)">
+          <div class="mode-icon">⚡</div>
+          <div class="mode-name">All-in-One</div>
+          <div class="mode-desc">Ad copy + audio + prompts</div>
+        </div>
+        <div class="mode-card" data-mode="adcopy" onclick="selectMode(this)">
+          <div class="mode-icon">✍️</div>
+          <div class="mode-name">Ad Copy</div>
+          <div class="mode-desc">TikTok captions & hooks</div>
+        </div>
+        <div class="mode-card" data-mode="audio" onclick="selectMode(this)">
+          <div class="mode-icon">🎙️</div>
+          <div class="mode-name">Audio Script</div>
+          <div class="mode-desc">Voiceover narrative</div>
+        </div>
+        <div class="mode-card" data-mode="prompts" onclick="selectMode(this)">
+          <div class="mode-icon">🤖</div>
+          <div class="mode-name">AI Prompts</div>
+          <div class="mode-desc">Ready-to-use prompt suite</div>
+        </div>
+      </div>
+
+      <button class="gen-btn" id="genBtn" onclick="generateContent()">
+        <div class="btn-shine"></div>
+        ✨ Generate Content for This Product
+      </button>
+
+      <!-- LOADING -->
+      <div class="loading" id="loading">
+        <div class="ld-spinner"></div>
+        <div class="ld-text">TitaSonia.Ph AI is working…</div>
+        <div class="ld-steps" id="ld-steps">Analyzing product details…</div>
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="output-area" id="outputArea">
+        <div class="out-tabs" id="outTabs"></div>
+        <div id="outPanels"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ 02 BRAND PILLARS ══ -->
+<div class="section">
+  <div class="sh"><div class="sh-num">02</div><div class="sh-title">Brand Content Pillars</div></div>
+  <div class="pillars-mini">
+    <div class="pm pm-glow">
+      <div class="pm-icon">🌺</div>
+      <div class="pm-name">Tita Glow</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Skincare · Beauty · Wellness</div>
+      <div class="pm-tags"><span class="pm-tag">Collagen</span><span class="pm-tag">Skincare</span><span class="pm-tag">Supplements</span><span class="pm-tag">Self-Care</span></div>
+    </div>
+    <div class="pm pm-finds">
+      <div class="pm-icon">🛍️</div>
+      <div class="pm-name">Tita Finds</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Fashion · Footwear · Hauls</div>
+      <div class="pm-tags"><span class="pm-tag">OOTD</span><span class="pm-tag">Fashion</span><span class="pm-tag">Footwear</span><span class="pm-tag">Hauls</span></div>
+    </div>
+    <div class="pm pm-life">
+      <div class="pm-icon">☕</div>
+      <div class="pm-name">Tita Life</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Real Talk · Faith · Mom Life</div>
+      <div class="pm-tags"><span class="pm-tag">Faith</span><span class="pm-tag">Mom Life</span><span class="pm-tag">Mindset</span><span class="pm-tag">Real Talk</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 03 AI PROMPT SUITE ══ -->
+<div class="section">
+  <div class="sh"><div class="sh-num">03</div><div class="sh-title">Quick AI Prompt Suite</div></div>
+  <div class="prompts-grid">
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">🎬</div><div class="pc-title">TikTok Video Script</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Write a <span class="p-gold">45-second TikTok script</span> for TitaSonia.Ph
+promoting <span class="p-rose">[PRODUCT]</span>.
+- Warm Filipina Tita voice, Taglish
+- Hook in first 3 seconds
+- Personal experience angle
+- <span class="p-sage">No medical claims</span> if supplement
+- Disclaimer: "results may vary"
+- End with shop CTA + #TitaFinds #Ad</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">✍️</div><div class="pc-title">High-Converting Caption</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Write 3 TikTok captions for
+<span class="p-rose">[PRODUCT]</span> as TitaSonia.Ph:
+- Version A: <span class="p-gold">curiosity hook</span>
+- Version B: <span class="p-gold">problem-solution</span>  
+- Version C: <span class="p-gold">personal story</span>
+Each: 150 chars max, Taglish,
+ends with CTA + 8 hashtags.
+Brand: Warm, practical, trustworthy.</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">🎙️</div><div class="pc-title">Audio Voiceover Script</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Write a <span class="p-gold">60-second voiceover</span> for
+<span class="p-rose">[PRODUCT]</span> as TitaSonia.Ph.
+Tone: Warm tita-friend talking
+to her kaibigan. Pacing: natural,
+<span class="p-sage">conversational pauses marked [pause]</span>.
+Include: emotion, storytelling,
+product benefit, soft CTA.
+Language: Taglish. No hard sell.</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">🖼️</div><div class="pc-title">Product Visual Description</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Describe <span class="p-rose">[PRODUCT]</span> for an AI
+image generator (Midjourney/DALL-E):
+- <span class="p-gold">Aesthetic: soft, warm, feminine</span>
+- Color palette: blush + gold + cream
+- Tita Sonia brand visual style
+- Flatlay or lifestyle photography
+- Add props: flowers, gold accents
+Output: 3 image prompt variations.</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">💬</div><div class="pc-title">Comment Reply Templates</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Write 10 comment replies for
+TitaSonia.Ph's <span class="p-rose">[PRODUCT]</span> video.
+Mix of: <span class="p-gold">curious questions, price
+asks, "where to buy", doubters</span>.
+Each reply: warm, helpful, Taglish.
+Always end with shop link reminder.
+Tone: like a tita friend replying
+— never salesy, always genuine.</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="pc-head"><div class="pc-icon">📧</div><div class="pc-title">Linktree Bio & Showcase</div></div>
+      <div class="pc-body">
+        <div class="pc-code">Write a Linktree bio and 
+3 button labels for TitaSonia.Ph
+featuring <span class="p-rose">[PRODUCT]</span>.
+- Bio: 2 sentences, warm, clear CTA
+- <span class="p-gold">Button 1: main shop</span>
+- Button 2: product category
+- Button 3: follow/community
+Style: Practical. Real. Trustworthy.</div>
+        <button class="pc-copy" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">TitaSonia.Ph — Brand Hub Pro</div>
+  <div class="footer-note">"Helping real women feel good, look good, and live better — one practical find at a time." 💕</div>
+</div>
+
+<div class="toast" id="toast">✓ Copied!</div>
+
+<script>
+// ── FILE UPLOAD ──
+let uploadedImageBase64 = null;
+
+function handleFile(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    uploadedImageBase64 = ev.target.result.split(',')[1];
+    const img = document.getElementById('preview-img');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('dz-placeholder').style.display = 'none';
+    document.getElementById('dropZone').classList.add('has-image');
+  };
+  reader.readAsDataURL(file);
+}
+
+// drag-drop
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    document.getElementById('fileInput').files = e.dataTransfer.files;
+    handleFile({ target: { files: e.dataTransfer.files } });
+  }
+});
+
+// ── MODE SELECT ──
+let selectedMode = 'all';
+function selectMode(el) {
+  document.querySelectorAll('.mode-card').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedMode = el.dataset.mode;
+}
+
+// ── GENERATE ──
+async function generateContent() {
+  const name       = document.getElementById('f-name').value.trim();
+  const cat        = document.getElementById('f-cat').value;
+  const price      = document.getElementById('f-price').value.trim();
+  const benefit    = document.getElementById('f-benefit').value.trim();
+  const experience = document.getElementById('f-experience').value.trim();
+  const audience   = document.getElementById('f-audience').value;
+  const lang       = document.getElementById('f-lang').value;
+
+  if (!name) { showToast('⚠️ Please enter a product name!'); return; }
+
+  const btn = document.getElementById('genBtn');
+  const loading = document.getElementById('loading');
+  const outputArea = document.getElementById('outputArea');
+
+  btn.disabled = true;
+  loading.classList.add('show');
+  outputArea.classList.remove('show');
+
+  // Loading steps
+  const steps = [
+    'Analyzing product details…',
+    'Crafting Tita voice scripts…',
+    'Building ad copy variations…',
+    'Writing audio narratives…',
+    'Assembling AI prompt suite…',
+    'Applying TikTok compliance…',
+    'Finalizing your content…'
+  ];
+  let stepIdx = 0;
+  const stepEl = document.getElementById('ld-steps');
+  const stepInterval = setInterval(() => {
+    stepIdx = (stepIdx + 1) % steps.length;
+    stepEl.textContent = steps[stepIdx];
+  }, 1400);
+
+  const isSupp = cat.toLowerCase().includes('supplement');
+  const priceStr = price ? `₱${price}` : 'affordable price';
+
+  const systemPrompt = `You are the AI content engine for TitaSonia.Ph, a Filipina lifestyle creator brand. 
+Brand: TitaSonia.Ph | @sonys_reco
+Tagline: "Practical. Real. For Real Women."
+Voice: Warm, friendly, tita-like, trustworthy, conversational, practical, uplifting
+Language: ${lang} preferred
+Audience: ${audience}
+Core values: Authentic · Practical · Empowering · Trustworthy
+CRITICAL RULES:
+- Never make medical claims. If supplement, use personal experience language only ("para sa akin", "naramdaman ko")
+- Always include "results may vary" for health/supplement products
+- Always include #Ad for affiliate content
+- Never use "cure", "treat", "prevent", "clinically proven", "guaranteed results"
+- Content must be TikTok Community Guidelines compliant
+- AIGC label reminder when AI-assisted`;
+
+  const isSupplement = cat.toLowerCase().includes('supplement') || cat.toLowerCase().includes('wellness');
+
+  const userPrompt = `Generate comprehensive content for this product being promoted by TitaSonia.Ph:
+
+PRODUCT DETAILS:
+- Name: ${name}
+- Category: ${cat}
+- Price: ${priceStr}
+- Key benefit: ${benefit || 'to be determined from context'}
+- Personal experience: ${experience || 'None provided — use general positive experience language'}
+- Audience: ${audience}
+
+${selectedMode === 'all' || selectedMode === 'adcopy' ? `
+═══════════════════════════════════
+SECTION 1: HIGH-CONVERTING AD COPY
+═══════════════════════════════════
+Generate ALL of the following:
+
+A) 3 TIKTOK CAPTION VERSIONS (each under 150 chars + 8 hashtags):
+   - Version A (Curiosity Hook): Start with a question or surprising statement
+   - Version B (Problem-Solution): Identify a relatable Tita pain point then offer the product as answer
+   - Version C (Personal Story): Lead with "Para sa akin..." or "Nung subukan ko..."
+
+B) 5 HOOK OPTIONS (first 3 seconds of video — make them stop scrolling):
+   - 1 question hook
+   - 1 bold statement hook  
+   - 1 "number" hook (e.g. "3 reasons why...")
+   - 1 curiosity gap hook
+   - 1 emotional/relatable hook
+
+C) 3 CALL-TO-ACTION VARIATIONS:
+   - Soft CTA (for lifestyle content)
+   - Direct CTA (for product posts)
+   - Urgency CTA (for sale/promo posts)
+
+D) PRODUCT DESCRIPTION (for Showcase/Shop listing, 3 sentences, benefit-focused, no claims):
+
+${isSupplement ? 'E) REQUIRED DISCLAIMER TEXT: Write the exact on-screen disclaimer text to add to the video.' : ''}
+` : ''}
+
+${selectedMode === 'all' || selectedMode === 'audio' ? `
+═══════════════════════════════════
+SECTION 2: AUDIO NARRATIVES
+═══════════════════════════════════
+Generate ALL of the following voiceover scripts:
+
+A) 30-SECOND VOICEOVER — Quick punchy, for short-form
+   - Natural spoken rhythm, include [pause] markers
+   - Hook → product → CTA
+   - Warm tita-friend tone
+
+B) 45-SECOND VOICEOVER — Standard TikTok length
+   - Hook → personal story → product show → disclaimer (if needed) → CTA
+   - Mark emotion cues: [excited], [sincere], [warm]
+   
+C) 60-SECOND FULL NARRATIVE — For longer storytelling content
+   - Full Tita story arc: relatable struggle → discovery → experience → recommendation → CTA
+   - Most powerful format for community connection
+
+D) 15-SECOND HOOK REEL — For TikTok ads or story previews
+   - Pure attention-grabbing, no selling yet
+   - End on cliffhanger to watch more
+` : ''}
+
+${selectedMode === 'all' || selectedMode === 'prompts' ? `
+═══════════════════════════════════
+SECTION 3: AI PROMPT SUITE
+═══════════════════════════════════
+Generate these ready-to-use AI prompts customized for ${name}:
+
+A) CHATGPT/CLAUDE SCRIPT PROMPT:
+   Full prompt to generate TikTok scripts specifically for this product
+
+B) MIDJOURNEY/IMAGE AI PROMPT:
+   3 image prompts for product photography in TitaSonia.Ph's aesthetic (blush, gold, warm cream tones)
+
+C) CAPCUT AI CAPTION PROMPT:
+   Instruction for AI caption generation that matches brand voice
+
+D) COMMENT REPLY TEMPLATES:
+   5 ready-to-copy replies for common comments about this product:
+   - "Magkano?"
+   - "Effective ba talaga?"
+   - "San makuha?"
+   - "Safe ba ito?"
+   - "May review ba?"
+
+E) EMAIL/DM OUTREACH PROMPT (for brand partnerships):
+   Template message to send to ${name.split(' ')[0]} brand asking for collab/free sample
+` : ''}
+
+Format everything clearly with section headers, emoji icons, and practical labels. Make it immediately usable for content creation.`;
+
+  try {
+    // Build message content
+    const msgContent = uploadedImageBase64
+      ? [
+          { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: uploadedImageBase64 } },
+          { type: 'text', text: userPrompt }
+        ]
+      : [{ type: 'text', text: userPrompt }];
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: msgContent }]
+      })
+    });
+
+    clearInterval(stepInterval);
+    const data = await response.json();
+    const raw = data.content?.map(b => b.text || '').join('') || '';
+
+    renderOutput(raw, name, selectedMode);
+
+  } catch (err) {
+    clearInterval(stepInterval);
+    renderError();
+  }
+
+  btn.disabled = false;
+  loading.classList.remove('show');
+}
+
+function renderOutput(raw, name, mode) {
+  const area = document.getElementById('outputArea');
+  const tabsEl = document.getElementById('outTabs');
+  const panelsEl = document.getElementById('outPanels');
+
+  // Split by sections
+  const sections = [];
+  if (mode === 'all' || mode === 'adcopy') {
+    const match = raw.match(/SECTION 1[\s\S]*?(?=SECTION 2|SECTION 3|$)/i);
+    if (match) sections.push({ id: 'adcopy', label: '✍️ Ad Copy', content: match[0] });
+  }
+  if (mode === 'all' || mode === 'audio') {
+    const match = raw.match(/SECTION 2[\s\S]*?(?=SECTION 3|$)/i);
+    if (match) sections.push({ id: 'audio', label: '🎙️ Audio Scripts', content: match[0] });
+  }
+  if (mode === 'all' || mode === 'prompts') {
+    const match = raw.match(/SECTION 3[\s\S]*/i);
+    if (match) sections.push({ id: 'prompts', label: '🤖 AI Prompts', content: match[0] });
+  }
+
+  // If sections not found (short output), show all as one
+  if (sections.length === 0) {
+    sections.push({ id: 'all', label: '✨ Generated Content', content: raw });
+  }
+
+  tabsEl.innerHTML = sections.map((s, i) =>
+    `<div class="out-tab ${i === 0 ? 'active' : ''}" onclick="switchOutTab('${s.id}')">${s.label}</div>`
+  ).join('');
+
+  panelsEl.innerHTML = sections.map((s, i) => `
+    <div class="out-panel ${i === 0 ? 'active' : ''}" id="panel-${s.id}">
+      <div class="out-box">
+        <div class="out-label">// TitaSonia.Ph Content — ${name}</div>
+        <div class="out-content">${formatContent(s.content)}</div>
+        <div class="out-actions">
+          <button class="act-btn act-copy" onclick="copyPanel('panel-${s.id}')">📋 Copy All</button>
+          <button class="act-btn act-dl" onclick="downloadPanel('panel-${s.id}', '${s.id}', '${name}')">⬇️ Download</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  area.classList.add('show');
+  area.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function formatContent(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/(#{1,3}\s.+)/g, '<span class="c-gold">$1</span>')
+    .replace(/(Version [A-E]:|Hook [A-E]:|CTA [A-Z]:|[A-E]\))/g, '<span class="c-bold">$1</span>')
+    .replace(/(#\w+)/g, '<span class="c-blue">$1</span>')
+    .replace(/(".*?")/g, '<span class="c-gold">$1</span>')
+    .replace(/(⚠️.*?\n)/g, '<span class="c-rose">$1</span>')
+    .replace(/(\[.*?\])/g, '<span class="c-sage">$1</span>');
+}
+
+function renderError() {
+  const area = document.getElementById('outputArea');
+  document.getElementById('outTabs').innerHTML = '<div class="out-tab active">⚠️ Error</div>';
+  document.getElementById('outPanels').innerHTML = `
+    <div class="out-panel active">
+      <div class="out-box">
+        <div class="out-content" style="color:var(--rose-lt)">Could not connect to AI. Please check your internet connection and try again.\n\nMake sure you're using this tool in the Claude.ai chat interface.</div>
+      </div>
+    </div>`;
+  area.classList.add('show');
+}
+
+function switchOutTab(id) {
+  document.querySelectorAll('.out-tab').forEach((t,i) => {
+    const panels = document.querySelectorAll('.out-panel');
+    t.classList.remove('active');
+    if (panels[i]) panels[i].classList.remove('active');
+  });
+  // match by id
+  document.querySelectorAll('.out-tab').forEach(t => {
+    if (t.textContent.toLowerCase().includes(id) || t.getAttribute('onclick')?.includes(id)) {
+      t.classList.add('active');
+    }
+  });
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+}
+
+function copyPanel(panelId) {
+  const el = document.getElementById(panelId);
+  const text = el?.querySelector('.out-content')?.innerText || '';
+  navigator.clipboard.writeText(text).catch(() => {});
+  showToast('✓ Copied to clipboard!');
+}
+
+function downloadPanel(panelId, type, name) {
+  const el = document.getElementById(panelId);
+  const text = el?.querySelector('.out-content')?.innerText || '';
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `TitaSoniaPh_${name.replace(/\s+/g,'_')}_${type}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('⬇️ Downloaded!');
+}
+
+// ── COPY PROMPT ──
+function copyPrompt(btn) {
+  const code = btn.previousElementSibling.innerText;
+  navigator.clipboard.writeText(code).catch(() => {});
+  btn.textContent = '✓ Copied!';
+  setTimeout(() => btn.textContent = '📋 Copy Prompt', 2000);
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+</script>
+</body>
+</html>
